@@ -1,0 +1,33 @@
+﻿@model HomeViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="d-flex flex-row vh-100">
+    <div class="flex-grow-1 d-flex flex-column">
+        @if (Model.MonHocs != null && Model.KhoaHoc != null)
+        {
+            <h2>Khóa học: @Model.KhoaHoc.TenKhoaHoc</h2>
+            <ol>
+                @foreach (var mh in Model.MonHocs)
+                {
+                    <li>@mh.TenMonHoc</li>
+                }
+            </ol>
+        }
+        else
+        {
+            <h2 class="d-flex justify-content-center align-items-center">Vui lòng chọn khóa học</h2>
+        }
+    </div>
+    <div class="w-auto border-start border-primary border-2 p-4">
+        <h2>Khóa học</h2>
+        <ul>
+            @foreach (var course in Model.KhoaHocs)
+            {
+                <li class="">@Html.ActionLink(@course.TenKhoaHoc, "Index", new { id = @course.ID}, new {@class= Model.KhoaHoc?.ID == course.ID ? "text-danger" : "" })</li>
+            }
+        </ul>
+    </div>
+</div>
